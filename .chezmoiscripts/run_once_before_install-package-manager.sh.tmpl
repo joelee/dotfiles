@@ -1,0 +1,38 @@
+#!/bin/bash
+
+
+{{ if eq .chezmoi.os "darwin" -}}
+
+set -e
+
+# Check if Homebrew is installed
+if command -v brew >/dev/null 2>&1; then
+    echo "✅ Homebrew is already installed at $(command -v brew)"
+else
+    echo "🚀 Homebrew not found. Installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Add Homebrew to PATH depending on architecture
+    if [[ -d "/opt/homebrew/bin" ]]; then
+        echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.bash_profile
+        export PATH="/opt/homebrew/bin:$PATH"
+    elif [[ -d "/usr/local/bin" ]]; then
+        echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
+        export PATH="/usr/local/bin:$PATH"
+    fi
+
+    echo "✅ Homebrew installation complete."
+fi
+
+if command -v fish >/dev/null 2>&1; then
+    echo "✅ Fish shell is already installed at $(command -v fish)"
+else
+    echo "🚀 Fish shell not found. Installing..."
+    brew install fish
+    echo "Your password may required to enable the Fish shell..."
+    sudo -sh -c "echo /opt/homebrew/bin/fish >> /etc/shells"
+    chsh -s /opt/homebrew/bin/fish
+fi
+
+{{ end --}}
+

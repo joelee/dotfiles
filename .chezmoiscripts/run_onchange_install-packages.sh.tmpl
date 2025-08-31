@@ -1,0 +1,12 @@
+#!/bin/bash
+
+{{ if eq .chezmoi.os "darwin" -}}
+
+if command -v brew >/dev/null 2>&1; then
+  brew bundle --file "$HOME/.config/Brewfile"
+else
+  echo "🛑 Homebrew is required, but was not install. See: https://brew.sh"
+fi
+
+{{ end --}}
+
