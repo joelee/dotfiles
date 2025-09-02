@@ -1,12 +1,15 @@
 #!/bin/bash
+# Brewfile hash: {{ include "dot_config/Brewfile" | sha256sum }}
 
 {{ if eq .chezmoi.os "darwin" -}}
 
 if command -v brew >/dev/null 2>&1; then
+  echo "Updating packages..."
   brew bundle --file "$HOME/.config/Brewfile"
 else
   echo "🛑 Homebrew is required, but was not install. See: https://brew.sh"
+  exit 1
 fi
 
-{{ end --}}
+{{ end -}}
 

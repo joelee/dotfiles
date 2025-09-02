@@ -24,6 +24,10 @@ else
     echo "✅ Homebrew installation complete."
 fi
 
+
+#################
+# Fish Shell
+#################
 if command -v fish >/dev/null 2>&1; then
     echo "✅ Fish shell is already installed at $(command -v fish)"
 else
@@ -34,5 +38,15 @@ else
     chsh -s /opt/homebrew/bin/fish
 fi
 
-{{ end --}}
+{{ end -}}
+
+
+###############
+# Rust
+###############
+if command -v rustup >/dev/null 2>&1; then
+  echo "🦀 Configuring Rust development environment..."
+  rustup default stable
+  rustup completions fish > ~/.config/fish/completions/rustup.fish
+fi
 

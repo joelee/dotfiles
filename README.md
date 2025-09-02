@@ -3,7 +3,7 @@
 [![chezmoi](https://img.shields.io/badge/managed%20with-chezmoi-00A0FF.svg)](https://www.chezmoi.io/)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
-This repository contains my personal `Dotfiles`, managed using [chezmoi](https://www.chezmoi.io/). 
+This repository contains my personal `Dotfiles`, managed using [chezmoi](https://www.chezmoi.io/).
 
 ---
 
@@ -34,9 +34,9 @@ Some highlights of what are the included configurations:
 - 🧪 My custom **Neovim** IDE configuration (LazyVim-based config).
 - 🖥️ Terminal: **Alacritty** & **Kitty**
 - 🧩 Development environments for **Python**, **Rust**, **Go**. and **Node.js**.
-- 🧰 CLI Tools: `fzf`, `zoxide`, `diner`, `asdf`, `docker`, and lots more...
+- 🧰 CLI Tools: `fzf`, `zoxide`, `direnv`, `eza`, `docker`, and [lots more](dot_config/private_fish/conf.d)...
 - 🪟 MacOS Tiling Window Management: **Amethyst** layouts.
-- ⌨️ **Kanata** custom keyboard layout to support **Home row mods** 
+- ⌨️ **Kanata** custom keyboard layout to support **Home row mods**
 - 🗄️ **Git** configuration tuned for project-based identities.
 - 📦 Package Management: **Homebrew** (Brewfile)
 
@@ -50,7 +50,9 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --prompt --apply joelee
 This will:
 1. Install chezmoi (if not already installed).
 2. Clone this repository.
-3. Apply all dotfiles into your $HOME directory.
+3. Apply all dotfiles into your `$HOME` directory.
+4. On MacOS: install Homebrew if it is not installed and [all the packages](dot_config/Brewfile)
+5. Install and activate the Fish shell
 
 > ⚠️ I recommend you to fork this project to your own repository, so that you can customised it to suit your workflow.
 > For more customised configuration. see the instructions below...
@@ -58,43 +60,13 @@ This will:
 ---
 
 ## 🚀 Quick Start (for New Mac)
+If you do not want to run an external script one line command above, you can set up these `Dotfiles` manually:
 
-### 1) Install Homebrew (if you don't have it)
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-### 2) Install chezmoi
-```bash
-brew install chezmoi
-```
-
-### 3) Pull & apply my dotfiles in one go
-```bash
-chezmoi init --prompt --apply joelee
-```
-
-### 4) Install Homebrew packages defined in the Brewfile
-```bash
-brew bundle --file "$HOME/.config/Brewfile"
-```
-
-### 5) Sanity check
-```bash
-chezmoi doctor
-```
-
-### 6) Enable Fish Shell
-```bash
-sudo -sh -c "echo /opt/homebrew/bin/fish >> /etc/shells"
-```
-Restart your Terminal
-
-### 7) Activate Fish Shell
-```bash
-chsh -s /opt/homebrew/bin/fish
-```
-Restart your terminal again
+1. Install [Homebrew](https://brew.sh/) (if you don't have it).
+2. Install chezmoi: `brew install chezmoi`
+3. Pull & apply my dotfiles in one go: `chezmoi init --prompt --apply joelee`
+4. Sanity check: `chezmoi doctor`
+5. Restart your Terminal
 
 ---
 
@@ -113,6 +85,13 @@ I believe in knowledge sharing and the open-source spirit. Publishing my `dotfil
 - **Promote automation** — because a repeatable environment saves time and reduces friction.
 
 If something here helps you speed up your workflow, that’s a win.
+
+---
+
+## 🔗 Helpful Links
+
+- [chezmoi Documentation](https://www.chezmoi.io/)
+- [Homebrew: Package Manager for MacOS](https://brew.sh/)
 
 ---
 

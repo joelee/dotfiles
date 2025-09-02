@@ -1,0 +1,11 @@
+theme = "night_owl"
+
+[keys.normal."+"]
+c = "switch_to_lowercase"
+C = "switch_to_uppercase"
+"A-c" = "switch_case"
+
+[keys.normal.g]
+G = "goto_file_end"
+
+

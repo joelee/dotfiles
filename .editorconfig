@@ -14,3 +14,10 @@ indent_size = 2
 [*.{lua,toml,json,yaml,yml}]
 indent_size = 2
 
+[*.{hpp,cc,hh,c,h,sh,pl,xs}]
+indent_style = space
+indent_size = 4
+
+[*.{diff,patch}]
+trim_trailing_whitespace = false
+

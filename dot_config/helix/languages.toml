@@ -1,0 +1,235 @@
+# ~/.config/helix/languages.toml
+
+
+##############################
+# Python with Ruff & PyRight
+##############################
+[[language]]
+name = "python"
+language-id = "python"
+scope = "source.python"
+injection-regex = "python"
+file-types = ["py", "ipynb"]
+roots = [
+  "pyproject.toml",
+  "setup.py",
+  "poetry.lock",
+  "requirements.txt",
+  ".git",
+]
+comment-token = "#"
+shebangs = ["python"]
+indent = { tab-width = 4, unit = "  " }
+formatter = { command = "ruff", args = ["format", "-"] }
+auto-format = true
+
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+environment = { "RUFF_TRACE" = "messages" }
+
+[language-server.ruff.config.settings]
+lineLength = 88
+logLevel = "debug"
+
+[language-server.ruff.config.settings.lint]
+select = [
+  "E",
+  "F",
+  "W",
+  "B",
+  "I",
+  "RUF",
+  "N",
+  "LOG",
+  "ERA",
+  "W",
+  "D",
+  "UP",
+  "ANN",
+  "ASYNC",
+  "S",
+  "RET",
+  "TCH",
+  "ARG",
+  "PTH",
+  "DOC",
+]
+preview = true
+
+[language-server.ruff.config.settings.format]
+preview = true
+quote-style = "double"
+docstring-code-format = true
+indent-style = "space"
+
+
+##############################
+# TOML with taplo
+##############################
+[[language]]
+name = "toml"
+#formatter = { command = "taplo", args = ["fmt", "-"] }
+file-types = ["toml"]
+language-servers = ["taplo"]
+auto-format = true
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+
+##############################
+# YAML with yamlls
+##############################
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
+comment-token = "#"
+
+language-servers = ["yamlls"]
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+
+[language-server.yamlls]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+##############################
+# JSON with jsonls
+##############################
+[[language]]
+name = "json"
+scope = "source.json"
+file-types = ["json"]
+comment-token = "//"
+
+language-servers = ["jsonls"]
+formatter = { command = "biome", args = [
+  "format",
+  "--stdin-file-path",
+  "{buffer_path}",
+] }
+
+
+[language-server.jsonls]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+
+
+##############################
+# Rust with rust-analyzer + rustfmt
+##############################
+[[language]]
+name = "rust"
+scope = "source.rust"
+file-types = ["rs"]
+roots = ["Cargo.toml", "rust-project.json", ".git"]
+language-servers = ["rust-analyzer"]
+formatter = { command = "rustfmt", args = ["--edition", "2021"] }
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+##############################
+# JavaScript with TSS + Biome
+##############################
+[[language]]
+name = "javascript"
+scope = "source.javascript"
+file-types = ["js", "mjs", "cjs"]
+comment-token = "//"
+language-servers = ["typescript-language-server"]
+formatter = { command = "biome", args = [
+  "format",
+  "--stdin-file-path",
+  "{buffer_path}",
+] }
+
+
+##############################
+# JSX (React) with TSS + Prettier
+##############################
+[[language]]
+name = "jsx"
+scope = "source.jsx"
+file-types = ["jsx"]
+comment-token = "//"
+language-servers = ["typescript-language-server"]
+formatter = { command = "biome", args = [
+  "format",
+  "--stdin-file-path",
+  "{buffer_path}",
+] }
+
+
+##############################
+# TypeScript with TSS + Prettier
+##############################
+[[language]]
+name = "typescript"
+scope = "source.ts"
+file-types = ["ts"]
+comment-token = "//"
+language-servers = ["typescript-language-server"]
+formatter = { command = "biome", args = [
+  "format",
+  "--stdin-file-path",
+  "{buffer_path}",
+] }
+
+##############################
+# TSX (React) with TSS + Prettier
+##############################
+[[language]]
+name = "tsx"
+scope = "source.tsx"
+file-types = ["tsx"]
+comment-token = "//"
+language-servers = ["typescript-language-server"]
+formatter = { command = "biome", args = [
+  "format",
+  "--stdin-file-path",
+  "{buffer_path}",
+] }
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+##############################
+# Bash (bash-language-server + shfmt)
+##############################
+[[language]]
+name = "bash"
+file-types = ["sh", "bash", "bats"]
+roots = [".git"]
+language-servers = ["bash-language-server"]
+formatter = { command = "shfmt", args = ["-filename", "{buffer_path}"] }
+auto-format = true
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]
+
+##############################
+# Terraform (terraform-ls + terraform fmt)
+##############################
+[[language]]
+name = "terraform"
+scope = "tfvars"
+file-types = ["tf", "tfvars"]
+roots = ["main.tf", ".terraform", ".git"]
+language-servers = ["terraform-ls"]
+# `terraform fmt -` reads from stdin and writes to stdout
+formatter = { command = "terraform", args = ["fmt", "-"] }
+auto-format = true
+
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve"]
