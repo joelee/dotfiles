@@ -72,7 +72,6 @@ indent-style = "space"
 ##############################
 [[language]]
 name = "toml"
-#formatter = { command = "taplo", args = ["fmt", "-"] }
 file-types = ["toml"]
 language-servers = ["taplo"]
 
