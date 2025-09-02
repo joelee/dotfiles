@@ -47,7 +47,6 @@ select = [
   "N",
   "LOG",
   "ERA",
-  "W",
   "D",
   "UP",
   "ANN",
