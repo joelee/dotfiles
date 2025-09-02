@@ -21,7 +21,6 @@ comment-token = "#"
 shebangs = ["python"]
 indent = { tab-width = 4, unit = "  " }
 formatter = { command = "ruff", args = ["format", "-"] }
-auto-format = true
 
 
 [language-server.pyright]
@@ -77,7 +76,6 @@ name = "toml"
 #formatter = { command = "taplo", args = ["fmt", "-"] }
 file-types = ["toml"]
 language-servers = ["taplo"]
-auto-format = true
 
 [language-server.taplo]
 command = "taplo"
@@ -211,7 +209,6 @@ file-types = ["sh", "bash", "bats"]
 roots = [".git"]
 language-servers = ["bash-language-server"]
 formatter = { command = "shfmt", args = ["-filename", "{buffer_path}"] }
-auto-format = true
 
 [language-server.bash-language-server]
 command = "bash-language-server"
@@ -228,8 +225,31 @@ roots = ["main.tf", ".terraform", ".git"]
 language-servers = ["terraform-ls"]
 # `terraform fmt -` reads from stdin and writes to stdout
 formatter = { command = "terraform", args = ["fmt", "-"] }
-auto-format = true
 
 [language-server.terraform-ls]
 command = "terraform-ls"
 args = ["serve"]
+
+
+##############################
+# SQL (sql-formatter)
+##############################
+[[language]]
+name = "sql"
+file-types = ["sql"]
+# Use the Node.js sql-formatter CLI (reads from stdin, writes to stdout)
+formatter = { command = "sql-formatter" }
+auto-format = true
+
+# --- Optional alternatives (pick ONE and comment out the others) ---
+# PostgreSQL-specific formatter:
+# formatter = { command = "pg_format", args = ["-"] }
+
+# Lint + format via SQLFluff (uses .sqlfluff + dialect rules):
+# formatter = { command = "sqlfluff", args = ["fix", "-"] }
+
+language-servers = ["sqlls"]
+
+[language-server.sqlls]
+command = "sql-language-server"
+args = ["up", "--method", "stdio"]
