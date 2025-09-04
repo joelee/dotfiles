@@ -31,14 +31,15 @@ Some highlights of what are the included configurations:
 
 - 🐚 **Fish Shell** customisations with completions and plugins + aliases.
 - ✨ **Starship prompt** for a fast, informative shell experience.
-- 🧪 My custom **Neovim** IDE configuration (LazyVim-based config).
+- 🧪 **Helix** IDE configuration (with various Language Servers and Formatters).
+- 🧪 **Neovim** configuration (LazyVim-based config).
 - 🖥️ Terminal: **Alacritty** & **Kitty**
 - 🧩 Development environments for **Python**, **Rust**, **Go**. and **Node.js**.
 - 🧰 CLI Tools: `fzf`, `zoxide`, `direnv`, `eza`, `docker`, and [lots more](dot_config/private_fish/conf.d)...
 - 🪟 MacOS Tiling Window Management: **Amethyst** layouts.
 - ⌨️ **Kanata** custom keyboard layout to support **Home row mods**
 - 🗄️ **Git** configuration tuned for project-based identities.
-- 📦 Package Management: **Homebrew** (Brewfile)
+- 📦 Package Management: **Homebrew** (Brewfile), **Nix**+**Home Manager**
 
 ---
 
@@ -91,6 +92,7 @@ If something here helps you speed up your workflow, that’s a win.
 ## 🔗 Helpful Links
 
 - [chezmoi Documentation](https://www.chezmoi.io/)
+- [Nix: Reference Manual](https://nix.dev/reference/nix-manual.html)
 - [Homebrew: Package Manager for MacOS](https://brew.sh/)
 
 ---
