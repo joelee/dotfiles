@@ -1,14 +1,25 @@
-if test -z $DOTFILES_HOME
-    if test -e $HOME/Dotfiles/init.sh
-        set -Ux DOTFILES_HOME $HOME/Dotfiles
-    else if test -e $HOME/.dotfiles/init.sh
-        set -Ux DOTFILES_HOME $HOME/.dotfiles
-    end
+set -x LANG en_US.UTF-8
+set -Ux EDITOR hx
+
+# Chezmoi one-line command installed itself here
+if test -e $HOME/bin
+    fish_add_path $HOME/bin
 end
 
-set -x LANG en_US.UTF-8
-set -Ux EDITOR nvim
+# This Dotfiles install useful utilities here
+if test -e $HOME/.local/bin
+    fish_add_path $HOME/.local/bin
+end
 
+# Homebrew package manager
 if test -e /opt/homebrew/bin
     fish_add_path /opt/homebrew/bin
+end
+
+# Nix & Home Manager
+if test -e /nix/var/nix/profiles/default/bin
+    fish_add_path /nix/var/nix/profiles/default/bin
+end
+if test -e $HOME/.nix-profile/bin
+    fish_add_path $HOME/.nix-profile/bin
 end
