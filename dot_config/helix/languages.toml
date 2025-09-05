@@ -223,6 +223,7 @@ roots = ["main.tf", ".terraform", ".git"]
 language-servers = ["terraform-ls"]
 # `terraform fmt -` reads from stdin and writes to stdout
 formatter = { command = "terraform", args = ["fmt", "-"] }
+auto-format = true
 
 [language-server.terraform-ls]
 command = "terraform-ls"

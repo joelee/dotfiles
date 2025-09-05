@@ -18,6 +18,9 @@ LICENSE
 .envrc
 .env
 
+# Brewfile is managed internally by Cheznoi run once script
+.config/Brewfile
+
 # Ignore MacOS specific files on non-Macs
 {{ if ne .chezmoi.os "darwin" }}
 Library/
