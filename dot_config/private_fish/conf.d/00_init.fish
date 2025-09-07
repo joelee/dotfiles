@@ -1,5 +1,4 @@
 set -x LANG en_US.UTF-8
-set -Ux EDITOR hx
 
 # Chezmoi one-line command installed itself here
 if test -e $HOME/bin
