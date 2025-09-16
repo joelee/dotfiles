@@ -29,11 +29,11 @@ I use [chezmoi](https://www.chezmoi.io/) to securely manage and apply these `dot
 ## 📂 What’s Inside
 Some highlights of what are the included configurations:
 
-- 🐚 **Fish Shell** customisations with completions and plugins + aliases.
+- 🐚 **Fish Shell** customisations with completions and plugins + GenAI interface.
 - ✨ **Starship prompt** for a fast, informative shell experience.
 - 🧪 **Helix** IDE configuration (with various Language Servers and Formatters).
 - 🧪 **Neovim** configuration (LazyVim-based config).
-- 🖥️ Terminal: **Alacritty** & **Kitty**
+- 🖥️ Terminal: **Alacritty** & **Kitty** with Zellij support
 - 🧩 Development environments for **Python**, **Rust**, **Go**. and **Node.js**.
 - 🧰 CLI Tools: `fzf`, `zoxide`, `direnv`, `eza`, `docker`, and [lots more](dot_config/private_fish/conf.d)...
 - 🪟 MacOS Tiling Window Management: **Amethyst** layouts.
@@ -46,7 +46,7 @@ Some highlights of what are the included configurations:
 ## 🚀 One Line Quick Start!
 To set up these `Dotfiles` on your machine, run:
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --prompt --apply joelee
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply joelee
 ```
 This will:
 1. Install chezmoi (if not already installed).
@@ -65,7 +65,7 @@ If you do not want to run an external script one line command above, you can set
 
 1. Install [Homebrew](https://brew.sh/) (if you don't have it).
 2. Install chezmoi: `brew install chezmoi`
-3. Pull & apply my dotfiles in one go: `chezmoi init --prompt --apply joelee`
+3. Pull & apply my dotfiles in one go: `chezmoi init --apply joelee`
 4. Sanity check: `chezmoi doctor`
 5. Restart your Terminal
 
