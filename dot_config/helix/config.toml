@@ -1,11 +1,75 @@
+
+##################
+# Custom Theme & Appearance
+##################
 theme = "night_owl"
 
+
+##################
+# Editor behaviour
+##################
+[editor]
+line-number         = "relative"
+default-line-ending = "lf"
+mouse               = true
+cursorline          = true
+color-modes         = true
+true-color          = true
+auto-pairs          = false
+scrolloff           = 6
+bufferline          = "multiple"
+continue-comments   = false
+
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+character = "┊"
+skip-levels = 1
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator", "read-only-indicator"]
+right = ["diagnostics", "version-control", "register", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "Nor"
+mode.insert = "Ins"
+mode.select = "Sel"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+
+##################
+# Key Bindings
+##################
+
+[keys.normal]
+"Meta-p" = "command_palette"
+"Meta-l" = ":toggle line-number absolute relative"
+"C-s"   = ":write"
+"C-n"   = ":new"
+"%"     = "match_brackets"
+
+
+
+[keys.insert]
+"Meta-p" = "command_palette"
+"Meta-l" = ":toggle line-number absolute relative"
+"C-s"   = ":write"
+
 [keys.normal."+"]
-c = "switch_to_lowercase"
-C = "switch_to_uppercase"
-"A-c" = "switch_case"
+
+m = ":run-shell-command make"
+
 
 [keys.normal.g]
-G = "goto_file_end"
-
+G     = "goto_file_end"
 

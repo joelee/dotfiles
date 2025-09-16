@@ -14,3 +14,13 @@ end
 
 alias du="du -h"
 alias duu="du -d1 -h"
+
+alias vi=nvim
+alias nv=neovide
+alias nano=nvim
+
+if type -q zellij
+    alias zz=zellij
+    alias zl="zellij list-sessions"
+    alias za="zellij attach"
+end

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.joeworks.kitty-session</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>2D6C9A82-589B-4681-A17F-EB2E6091C2EB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F412156-FDA3-4E35-AEE0-F0B478A6A9BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Joe Lee</string>
+	<key>description</key>
+	<string>New Kitty window and attach to Zellij session</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Kitty Zellij Session</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>zz</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>#!/usr/bin/env python3
+import json, os, shutil, subprocess, sys
+
+query = sys.argv[1] if len(sys.argv) &gt; 1 else ""
+items = []
+
+def add_item(title, subtitle="", arg="", uid=None, valid=True):
+    item = {
+        "title": title,
+        "subtitle": subtitle,
+        "arg": arg,
+        "valid": valid
+    }
+    if uid:
+        item["uid"] = uid
+    # helpful for Alfred matching
+    item["match"] = title
+    items.append(item)
+
+# If zellij is missing, still let user open Kitty normally
+if not shutil.which("zellij"):
+    add_item(
+        "zellij not found",
+        "Press ↩ to open Kitty normally",
+        "__NORMAL__",
+        uid="zellij-missing"
+    )
+    add_item("Open Kitty (no Zellij auto-attach)", "", "__NORMAL__", uid="kitty-normal")
+    print(json.dumps({"items": items}))
+    sys.exit(0)
+
+# Get active session names (one per line)
+try:
+    out = subprocess.check_output(["zellij", "list-sessions", "--short"], text=True, stderr=subprocess.DEVNULL)
+    sessions = sorted({line.strip() for line in out.splitlines() if line.strip()})
+except subprocess.CalledProcessError:
+    sessions = []
+
+# If user typed a query, offer to attach/create that session
+if query:
+    add_item(
+        f"{query} (New session)",
+        f"Launch Kitty with new Zellij session: {query}",
+        query,
+        uid=f"create:{query}"
+    )
+
+# Always offer normal Kitty
+add_item("Open Kitty without Zellij session", "", "__NORMAL__", uid="kitty-normal-bottom")
+
+# Existing sessions
+if sessions:
+    for s in sessions:
+        add_item(
+            f"{s} (Active Session)",
+            f"Attach in Kitty (Zellij session: {s})",
+            s,
+            uid=f"session:{s}"
+        )
+else:
+    add_item("No active Zellij sessions", "Press ↩ to open Kitty normally", "__NORMAL__", uid="none")
+
+
+
+print(json.dumps({"items": items}))
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Zellij sessions on Kitty terminal</string>
+				<key>type</key>
+				<integer>9</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2D6C9A82-589B-4681-A17F-EB2E6091C2EB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>#!/usr/bin/env bash
+set -euo pipefail
+KITTY_BIN="${KITTY_BIN:-/opt/homebrew/bin/kitty}"
+
+arg="${1-}"
+
+# Open Kitty in background; rely on your fish config.fish to auto-attach
+if [[ -z "$arg" || "$arg" == "__NORMAL__" ]]; then
+  nohup "$KITTY_BIN" &gt;/dev/null 2&gt;&amp;1 &amp;
+else
+  nohup env KITTY_SESSION="$arg" "$KITTY_BIN" &gt;/dev/null 2&gt;&amp;1 &amp;
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6F412156-FDA3-4E35-AEE0-F0B478A6A9BD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Alfred workflow to browse and launch Zellij sessions in Kitty. Type zz to list active sessions (zellij list-sessions --short). Press ↩ to attach in Kitty, or type a new name to create/attach. Choose “Open Kitty (no Zellij auto-attach)” for a normal window. Set workflow variable KITTY_BIN (defaults to /opt/homebrew/bin/kitty). Intended to pair with a shell config that auto-attaches when KITTY_SESSION is set. Requirements: Kitty, Fish shell and Zellij installed. 
+
+Requires config.fish from https://github.com/joelee/dotfiles/blob/383fcce2cc6741b7f6e46afdc1f61b216487bb15/dot_config/private_fish/config.fish</string>
+	<key>uidata</key>
+	<dict>
+		<key>2D6C9A82-589B-4681-A17F-EB2E6091C2EB</key>
+		<dict>
+			<key>xpos</key>
+			<real>135</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
+		<key>6F412156-FDA3-4E35-AEE0-F0B478A6A9BD</key>
+		<dict>
+			<key>xpos</key>
+			<real>430</real>
+			<key>ypos</key>
+			<real>310</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variables</key>
+	<dict>
+		<key>KITTY_BIN</key>
+		<string>/opt/homebrew/bin/kitty</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.1.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/joelee/dotfiles</string>
+</dict>
+</plist>

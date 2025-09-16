@@ -13,6 +13,7 @@ end
 # Homebrew package manager
 if test -e /opt/homebrew/bin
     fish_add_path /opt/homebrew/bin
+    set -Ux HOMEBREW_AUTO_UPDATE_SECS 3600
 end
 
 # Nix & Home Manager

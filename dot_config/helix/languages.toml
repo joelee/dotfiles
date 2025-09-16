@@ -1,8 +1,7 @@
 # ~/.config/helix/languages.toml
 
-
 ##############################
-# Python with Ruff & PyRight
+# Python with Ruff, PyRight & Pylyzer
 ##############################
 [[language]]
 name = "python"
@@ -20,12 +19,16 @@ roots = [
 comment-token = "#"
 shebangs = ["python"]
 indent = { tab-width = 4, unit = "  " }
+language-servers = ["pyright", "ruff", "pylyzer"]
 formatter = { command = "ruff", args = ["format", "-"] }
 
 
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
 
 [language-server.ruff]
 command = "ruff"
@@ -66,6 +69,9 @@ quote-style = "double"
 docstring-code-format = true
 indent-style = "space"
 
+[language-server.pylyzer]
+command = "pylyzer"
+args = ["--server"]
 
 ##############################
 # TOML with taplo
@@ -131,6 +137,12 @@ formatter = { command = "rustfmt", args = ["--edition", "2021"] }
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+[language-server.rust-analyzer.config.cargo]
+features = "all"
 
 ##############################
 # JavaScript with TSS + Biome
@@ -216,9 +228,19 @@ args = ["start"]
 # Terraform (terraform-ls + terraform fmt)
 ##############################
 [[language]]
-name = "terraform"
-scope = "tfvars"
-file-types = ["tf", "tfvars"]
+name = "tfvars"
+language-id = "terraform-vars"
+file-types = ["tfvars"]
+roots = ["main.tf", ".terraform", ".git"]
+language-servers = ["terraform-ls"]
+# `terraform fmt -` reads from stdin and writes to stdout
+formatter = { command = "terraform", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "hcl"
+language-id = "terraform"
+file-types = ["tf"]
 roots = ["main.tf", ".terraform", ".git"]
 language-servers = ["terraform-ls"]
 # `terraform fmt -` reads from stdin and writes to stdout
@@ -228,6 +250,7 @@ auto-format = true
 [language-server.terraform-ls]
 command = "terraform-ls"
 args = ["serve"]
+# config.indexing.ignorePaths = ["ignore.hcl"]
 
 
 ##############################
@@ -239,14 +262,6 @@ file-types = ["sql"]
 # Use the Node.js sql-formatter CLI (reads from stdin, writes to stdout)
 formatter = { command = "sql-formatter" }
 auto-format = true
-
-# --- Optional alternatives (pick ONE and comment out the others) ---
-# PostgreSQL-specific formatter:
-# formatter = { command = "pg_format", args = ["-"] }
-
-# Lint + format via SQLFluff (uses .sqlfluff + dialect rules):
-# formatter = { command = "sqlfluff", args = ["fix", "-"] }
-
 language-servers = ["sqlls"]
 
 [language-server.sqlls]
