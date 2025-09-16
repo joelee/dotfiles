@@ -54,22 +54,51 @@ cursor-line = "hint"
 [keys.normal]
 "Meta-p" = "command_palette"
 "Meta-l" = ":toggle line-number absolute relative"
-"C-s"   = ":write"
-"C-n"   = ":new"
-"%"     = "match_brackets"
+"C-s"    = ":write"
+"C-n"    = ":new"
+"%"      = "match_brackets"
+H        = ":buffer-previous"
+L        = ":buffer-next"
+X        = "select_line_above"
+tab = "move_parent_node_end"
+S-tab = "move_parent_node_start"
 
+[keys.normal.g]
+G     = "goto_file_end"
 
+[keys.select]
+ret = "extend_to_word"
+X = "select_line_above"
+tab = "extend_parent_node_end"
+S-tab = "extend_parent_node_start"
 
 [keys.insert]
 "Meta-p" = "command_palette"
 "Meta-l" = ":toggle line-number absolute relative"
-"C-s"   = ":write"
+"C-s"    = ":write"
 
-[keys.normal."+"]
+[keys.normal.backspace]
+M = ":run-shell-command make"
+w = ":write-all"
+r = [":reload-all", ":config-reload"]
+# Yazi
+e = [
+  ':sh rm -f /tmp/yazi-hx-file',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-hx-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/yazi-hx-file}',
+  ':redraw',
+  ':set mouse false',
+  ':set mouse true',
+]
+# Lazygit
+g = [
+  ":write-all",
+  ":insert-output lazygit >/dev/tty",
+  ":redraw",
+  ":set mouse false",
+  ":set mouse true",
+  ":reload-all"
+]
 
-m = ":run-shell-command make"
-
-
-[keys.normal.g]
-G     = "goto_file_end"
 

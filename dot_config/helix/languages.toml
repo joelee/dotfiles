@@ -109,20 +109,21 @@ args = ["--stdio"]
 name = "json"
 scope = "source.json"
 file-types = ["json"]
-comment-token = "//"
-
-language-servers = ["jsonls"]
-formatter = { command = "biome", args = [
-  "format",
-  "--stdin-file-path",
-  "{buffer_path}",
-] }
+language-servers = [
+  { name = 'biome' },
+  { name = "jsonls", except-features = [ "format" ] }
+]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.json"] }
 
 
 [language-server.jsonls]
 command = "vscode-json-language-server"
 args = ["--stdio"]
 
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
+display-messages = true
 
 ##############################
 # Rust with rust-analyzer + rustfmt
@@ -235,7 +236,6 @@ roots = ["main.tf", ".terraform", ".git"]
 language-servers = ["terraform-ls"]
 # `terraform fmt -` reads from stdin and writes to stdout
 formatter = { command = "terraform", args = ["fmt", "-"] }
-auto-format = true
 
 [[language]]
 name = "hcl"
@@ -245,7 +245,6 @@ roots = ["main.tf", ".terraform", ".git"]
 language-servers = ["terraform-ls"]
 # `terraform fmt -` reads from stdin and writes to stdout
 formatter = { command = "terraform", args = ["fmt", "-"] }
-auto-format = true
 
 [language-server.terraform-ls]
 command = "terraform-ls"

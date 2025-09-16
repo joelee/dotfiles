@@ -15,7 +15,7 @@ if [[ -z "$EMAIL" ]]; then
 fi
 
 # Ensure the backup path is relative to where the script is executed
-BACKUP_PATH="$(pwd)/$BACKUP_FILE"
+BACKUP_PATH="$HOME/$BACKUP_FILE"
 
 TMPDIR=$(mktemp -d)
 trap 'rm -rf "$TMPDIR"' EXIT
@@ -32,9 +32,15 @@ gpg --export-secret-subkeys -a "$EMAIL" >"$TMPDIR/subkeys.asc" || true
 echo "[*] Exporting ownertrust..."
 gpg --export-ownertrust >"$TMPDIR/ownertrust.txt"
 
+if [ -d "$HOME/.password-store" ]; then
+    echo "[*] Exporting Pass Store..."
+    cp -R "$HOME/.password-store" "$TMPDIR/password_store"
+fi
+
 echo "[*] Creating encrypted ZIP archive ($BACKUP_PATH)..."
 # zip will prompt for a password
-(cd "$TMPDIR" && zip -er "$BACKUP_PATH" ./*)
-
+(cd "$TMPDIR" && zip -9yer "$BACKUP_PATH" ./*)
+chmod 0700 "$BACKUP_PATH"
+ 
 echo "[✔] Backup complete: $BACKUP_PATH"
 echo "    Keep it safe. Do NOT store unencrypted copies."

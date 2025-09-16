@@ -1,0 +1,15 @@
+[fish-ai]
+configuration = google
+completions = 8
+temperature = 0.2
+history_size = 5
+
+[local-llama]
+provider = self-hosted
+server = http://localhost:11434/v1
+model = llama3.1:8b
+
+[google]
+provider = google
+api_key = {{ pass "api-key/google" | default "no-key" }}
+

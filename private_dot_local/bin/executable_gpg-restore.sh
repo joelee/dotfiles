@@ -30,6 +30,12 @@ if [[ -f "$TMPDIR/subkeys.asc" ]]; then
   gpg --import "$TMPDIR/subkeys.asc"
 fi
 
+if [[ -d "$TMPDIR/password-store" ]]; then
+  mv "$TMPDIR/password-store" "$HOME/.password-store"
+  chown 0700 "$HOME/.password-store"
+fi
+
+
 echo "[*] Importing trust database..."
 gpg --import-ownertrust < "$TMPDIR/ownertrust.txt"
 
