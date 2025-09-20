@@ -14,6 +14,7 @@ end
 if test -e /opt/homebrew/bin
     fish_add_path /opt/homebrew/bin
     set -Ux HOMEBREW_AUTO_UPDATE_SECS 3600
+    set -Ux HOMEBREW_NO_ENV_HINTS 1
 end
 
 # Nix & Home Manager

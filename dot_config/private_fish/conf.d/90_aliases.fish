@@ -23,4 +23,5 @@ if type -q zellij
     alias zz=zellij
     alias zl="zellij list-sessions"
     alias za="zellij attach"
+    alias zac="zellij attach --create"
 end
