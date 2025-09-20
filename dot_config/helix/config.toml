@@ -26,31 +26,35 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
+
 [editor.file-picker]
 hidden = false
 
+
 [editor.indent-guides]
-render = true
-character = "┊"
+render      = true
+character   = "┊"
 skip-levels = 1
 
+
 [editor.statusline]
-left = ["mode", "spinner", "file-name", "file-modification-indicator", "read-only-indicator"]
-right = ["diagnostics", "version-control", "register", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
-separator = "│"
-mode.normal = "Nor"
-mode.insert = "Ins"
-mode.select = "Sel"
-diagnostics = ["warning", "error"]
+left                  = ["mode", "spinner", "file-name", "file-modification-indicator", "read-only-indicator"]
+right                 = ["diagnostics", "version-control", "register", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator             = "│"
+mode.normal           = "Nor"
+mode.insert           = "Ins"
+mode.select           = "Sel"
+diagnostics           = ["warning", "error"]
 workspace-diagnostics = ["warning", "error"]
+
 
 [editor.inline-diagnostics]
 cursor-line = "hint"
 
+
 ##################
 # Key Bindings
 ##################
-
 [keys.normal]
 "Meta-p" = "command_palette"
 "Meta-l" = ":toggle line-number absolute relative"
@@ -60,22 +64,26 @@ cursor-line = "hint"
 H        = ":buffer-previous"
 L        = ":buffer-next"
 X        = "select_line_above"
-tab = "move_parent_node_end"
-S-tab = "move_parent_node_start"
+tab      = "move_parent_node_end"
+S-tab    = "move_parent_node_start"
+
 
 [keys.normal.g]
-G     = "goto_file_end"
+G        = "goto_file_end"
+
 
 [keys.select]
-ret = "extend_to_word"
-X = "select_line_above"
-tab = "extend_parent_node_end"
-S-tab = "extend_parent_node_start"
+ret      = "extend_to_word"
+X        = "select_line_above"
+tab      = "extend_parent_node_end"
+S-tab    = "extend_parent_node_start"
+
 
 [keys.insert]
 "Meta-p" = "command_palette"
 "Meta-l" = ":toggle line-number absolute relative"
 "C-s"    = ":write"
+
 
 [keys.normal.backspace]
 M = ":run-shell-command make"
