@@ -1,8 +1,12 @@
-{{- $userFullName := promptStringOnce . "userFullName" "Your Full Name - use for .gitconfig" -}}
-{{- $userEmail := promptStringOnce . "userEmail" "Your Email Address - use for .gitconfig" -}}
+{{ $username := promptString "User name for .gitconfig" -}}
+{{ $email := promptString "Your Email for .gitconfig" -}}
 
+[secret]
+command = "get-secret.sh"
+
+[template]
+options = ["missingkey=zero"]
 
 [data]
-userFullName = {{ $userFullName | quote }}
-userEmail = {{ $userEmail | quote }}
-
+username = {{ $username | quote }}
+email = {{ $email | quote }}

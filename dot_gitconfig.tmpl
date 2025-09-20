@@ -1,6 +1,13 @@
 # Common .gitconfig file
-# Save your personal details like username and email in
-#  $HOME/.gitconfig.local
+
+{{ $signingkey := secret "git/signingkey" "0" -}}
+
+[user]
+	name = {{ .username | quote }}
+	email = {{ .email | quote }}
+{{ if .userSignKey }}
+  signingkey = {{ .signingkey | quote }}
+{{ end }}
 
 [core]
   eol = lf
@@ -61,6 +68,12 @@
 
 [credential "https://dev.azure.com"]
   useHttpPath = true
+
+[init]
+defaultBranch = main
+
+[fetch]
+prune = true
 
 [include]
   path = ~/.gitconfig.local

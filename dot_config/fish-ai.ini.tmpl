@@ -13,5 +13,4 @@ model = llama3.1:8b
 
 [google]
 provider = google
-api_key = {{ pass "api-key/google" | default "no-key" }}
-
+api_key = {{ secret "api-key/google" "api-key-was-not-set" }}
