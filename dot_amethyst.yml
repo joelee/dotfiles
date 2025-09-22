@@ -56,7 +56,7 @@ select-middle-wide-layout:
   mod: mod1
   key: s
 
-select-wide-layout:
+select-widescreen-tall-right-layout:
   mod: mod2
   key: s
 
