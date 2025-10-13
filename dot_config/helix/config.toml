@@ -108,6 +108,6 @@ g = [
   ":set mouse true",
   ":reload-all"
 ]
-# Git blame on current line in statuws bar
+# Git blame on current line in status bar
 b = ":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}"
 
