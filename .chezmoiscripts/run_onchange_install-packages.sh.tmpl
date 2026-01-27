@@ -5,6 +5,10 @@
 
 if command -v brew >/dev/null 2>&1; then
   echo "Updating packages..."
+  BREWFILE="${HOME}/.config/Brewfile"
+  if ! test  -f "${BREWFILE}"; then
+    cp "${HOME}/.local/share/chezmoi/dot_config/Brewfile" "${BREWFILE}"
+  fi
   brew bundle --file "$HOME/.config/Brewfile"
 else
   echo "🛑 Homebrew is required, but was not install. See: https://brew.sh"
