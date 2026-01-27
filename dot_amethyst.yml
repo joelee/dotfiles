@@ -3,7 +3,7 @@
 #
 # Reference: https://github.com/ianyh/Amethyst/blob/development/docs/configuration-files.md
 #
-# Version: 250806
+# Version: 251015
 
 layouts:
   - tall
@@ -11,13 +11,15 @@ layouts:
   - fullscreen
   - floating
   - middle-wide
-  - 4column-left
   - widescreen-tall
   - widescreen-tall-right
   - tall-right
   - two-pane-right
-  - 4column-right
-  - wide
+  - 3column-left
+  - 3column-right
+  # - 4column-left
+  # - 4column-right
+  # - wide
   # - joe-tv-focus
   # - joe-tv-ide
   # - joe-tv-dual
@@ -33,13 +35,13 @@ mod2:
 
 command1:
   mod: mod1
-  key: '['
+  key: "["
 command2:
   mod: mod1
-  key: ']'
+  key: "]"
 command3:
   mod: mod1
-  key: ';'
+  key: ";"
 command4:
   mod: mod1
   key: "'"
@@ -48,7 +50,7 @@ select-tall-layout:
   mod: mod1
   key: a
 
-select-widescreen-tall-layout:
+select-tall-right-layout:
   mod: mod2
   key: a
 
@@ -56,7 +58,7 @@ select-middle-wide-layout:
   mod: mod1
   key: s
 
-select-widescreen-tall-right-layout:
+select-widescreen-tall-layout:
   mod: mod2
   key: s
 
@@ -76,30 +78,26 @@ select-floating-layout:
   mod: mod2
   fey: f
 
-select-4column-left-layout:
+select-3column-left-layout:
   mod: mod1
   key: g
 
-select-4column-right-layout:
+select-3column-right-layout:
   mod: mod2
   key: g
-
 
 use-canary-build: true
 mouse-follows-focus: true
 debug-layout-info: true
-restore-layouts-on-launch: false
+restore-layouts-on-launch: true
 smart-window-margins: true
 
-window-max-count: 5
+window-max-count: 8
 window-minimum-height: 640
 window-minimum-width: 480
 
 window-margins: true
 window-margin-size: 5
-
-restore-layouts-on-launch: true
-
 
 floating:
   - com.apple.finder
@@ -124,4 +122,3 @@ floating:
   - com.coteditor.CotEditor
   - com.amazonaws.acvc.osx
   - us.zoom.xos
-

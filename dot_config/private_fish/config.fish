@@ -13,6 +13,7 @@ if status is-interactive
                 for _line in $_zs
                     echo "    - $_line"
                 end
+                echo "To attach session: za <session_name>"
                 echo
             end
         end
