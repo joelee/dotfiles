@@ -10,8 +10,7 @@ if command -v brew >/dev/null 2>&1; then
     cp "${HOME}/.local/share/chezmoi/dot_config/Brewfile" "${BREWFILE}"
   fi
   export PATH="${HOME}/.cargo/bin:${PATH}"
-  brew bundle --file "$HOME/.config/Brewfile"
-  exit 0
+  brew bundle --verbose --file "$HOME/.config/Brewfile"i || true
 else
   echo "🛑 Homebrew is required, but was not install. See: https://brew.sh"
   exit 1
