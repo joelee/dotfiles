@@ -26,6 +26,7 @@ LICENSE
 Library/
 .amethyst.yml
 Brewfile
+.config/karabiner
 {{ end }}
 
 
